@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="xlang",
-    version="0.0.5",
+    version="0.0.6",
 
     author="cvdnn",
     author_email="cvvdnn@gmail.com",

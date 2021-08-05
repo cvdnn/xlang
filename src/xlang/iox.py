@@ -11,10 +11,17 @@ from xlang import logger
 
 
 class SizeType(IntEnum):
-    B = 1
-    KB = 2
-    MB = 3
-    GB = 4
+    BYTE = 0
+    KB = 1
+    MB = 2
+    GB = 3
+    TB = 4
+    PB = 5
+    EB = 6
+    ZB = 7
+    YB = 8
+    DB = 9
+    NB = 10
 
     def radix(self) -> float:
         return math.pow(1024, self.value)
