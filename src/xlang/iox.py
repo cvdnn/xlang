@@ -1,38 +1,41 @@
 # -*- coding: utf8 -*-
 
+import json
 import os
 import shutil
 from os import path
 
-import json
-from loguru import logger
-
-# 图片后缀名
-SUFFIX_IMAGE = ['.jpg', '.png', '.jpeg', '.bmp']
+from xlang import logger
 
 
-def is_image_file(file_path):
-    return filesuffix(file_path).lower() in SUFFIX_IMAGE
-
-
-def filename(abspath: str) -> str:
+def get_file_name(abspath: str) -> str:
     return path.splitext(path.basename(abspath))[0]
 
 
-def filesuffix(abspath: str) -> str:
+def get_file_suffix(abspath: str) -> str:
     return path.splitext(path.basename(abspath))[1]
 
 
-def split(abspath: str):
-    dir_path = file_name = suffix = ''
+def split_path(abspath: str):
+    dir_path, f_name, suffix = '', '', ''
     if abspath:
         dir_path = path.dirname(abspath)
         base_name = path.basename(abspath)
         split_array = path.splitext(base_name)
-        file_name = split_array[0]
+        f_name = split_array[0]
         suffix = split_array[1]
 
-    return dir_path, file_name, suffix
+    return dir_path, f_name, suffix
+
+
+def remove_sub_files(del_path):
+    if path.exists(del_path):
+        for file in os.listdir(del_path):
+            file_path = path.join(del_path, file)
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+            elif path.isdir(file_path):
+                shutil.rmtree(file_path)
 
 
 def dumps(data_json: dict):
