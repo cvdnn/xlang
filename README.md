@@ -1,3 +1,3 @@
-# imgz
+# xlang
 
-This is a image util package.
+This is a python util package.
