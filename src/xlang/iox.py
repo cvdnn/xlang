@@ -1,11 +1,27 @@
 # -*- coding: utf8 -*-
 
 import json
+import math
 import os
 import shutil
+from enum import IntEnum
 from os import path
 
 from xlang import logger
+
+
+class SizeType(IntEnum):
+    B = 1
+    KB = 2
+    MB = 3
+    GB = 4
+
+    def radix(self) -> float:
+        return math.pow(1024, self.value)
+
+
+def get_file_size(filepath, stype: SizeType = SizeType.KB):
+    return path.getsize(filepath) / stype.radix()
 
 
 def get_file_name(abspath: str) -> str:
